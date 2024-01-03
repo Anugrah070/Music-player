@@ -20,14 +20,14 @@
         
         <div class="flex flex-col  items-center gap-5 w-96">
             <div class=" flex items-center ">
-                <div id="Current_time" class="p-2">00.00</div>
-                <input type="range" min="0" max="100" value="0" class=" w-72">
-                <div id="total_time" class="p-2">00.00</div>
+                <div id="Current-time" class="p-2">00.00</div>
+                <input id="seek-slider" type="range" min="0" max="100" step="1" value="0" class=" w-72" oninput="changeSeek(this.value)">
+                <p id="total_time"class="p-2">00.00</p>
             </div>
     
             <div class=" mb-3">
                 <i class='bx bxs-volume-low' ></i>
-                <input type="range" min="0" max="100" value="99" class="w-44">
+                <input type="range" min="0" max="1" step="0.01" value="1" class="w-44" oninput="changeVolume(this.value)">
                 <i class='bx bxs-volume-full' ></i>
             </div>
         </div>
@@ -35,11 +35,11 @@
         
 
         <div class="buttons flex justify-center gap-9   ">
-            <div class="buttons_hover">
+            <div class="buttons_hover" onclick="shuffle()">
                 <i class='bx bx-shuffle bx-lg'></i>
             </div>
             
-            <div class="buttons_hover">
+            <div class="buttons_hover" onclick="prevMusic()">
                 <i class='bx bx-skip-previous  bx-lg'></i>
             </div>
             
