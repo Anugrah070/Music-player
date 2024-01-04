@@ -1,6 +1,6 @@
 # Music-player
 
-#OVERVIEW
+#OVERVIEW<br>
 Capabale of playing music along with providing an interactive interface to control aspects of the music being played .<br>
 Contains repeat,shuffle,volume control,seek function 
 
