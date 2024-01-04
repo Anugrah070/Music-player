@@ -1,4 +1,7 @@
 const PlayPauseIcon=document.getElementById("PLayPause-Icon")
+const TracknameDOM=document.getElementById("Track-Name")
+const ArtistnameDOM=document.getElementById("Artist-Name")
+const CoverImg=document.getElementById("cover-img")
 let audio=document.getElementById("myAudio")
 const seekSlider=document.getElementById("seek-slider")
 const currentTimeDOM=document.getElementById("Current-time")
@@ -8,12 +11,31 @@ let currentMusic=0
 let isPlaying=false
 
 const musicPlaylist=[
-    '/music/chineseFlute.mp3',
-    '/music/Faded.mp3',
-    '/music/GTA4.mp3',
-    '/music/Doom.mp3',
-    '/music/GOW.mp3',
-    '/music/cyberpunk.mp3',
+
+    {
+        TrackName:'Soviet Connection',
+        music:'/music/GTA4.mp3',
+        artistName:"Michael Hunter",
+        cover:"/images/gta4img.jpg"
+    },
+    {
+        TrackName:"The Only Thing They Fear Is You [Doom Eternal Theme]",
+        music:'/music/Doom.mp3',
+        artistName:"Mick Gordon",
+        cover:"/images/doomimg.jpeg"
+    },
+    {
+        TrackName:"God of War theme",
+        music:'/music/GOW.mp3',
+        artistName:"Bear McCreary",
+        cover:"/images/gowimg.jpg"
+    },
+    {
+        TrackName:"The Rebel Path[Johnny Silverhand Theme]",
+        music:'/music/cyberpunk.mp3',
+        artistName:"P.T. Adamczyk",
+        cover:"/images/cybimg.jpg"
+    }
 ]
 
 audio.addEventListener("loadedmetadata",()=>{getaudioDuration()})
@@ -40,6 +62,7 @@ function prevMusic(){
         currentMusic=currentMusic-1
         playbackPosition=0
         playAudio()
+        
     }
         
 }
@@ -70,12 +93,14 @@ function togglePlayPause(){
 }
 
 function playAudio(){
-    audio.src=musicPlaylist[currentMusic]
+    audio.src=musicPlaylist[currentMusic].music
+    TracknameDOM.textContent=musicPlaylist[currentMusic].TrackName
+    ArtistnameDOM.textContent=musicPlaylist[currentMusic].artistName
+    CoverImg.src=musicPlaylist[currentMusic].cover
     audio.currentTime=playbackPosition
     audio.play()
     PlayPauseIcon.className='bx bx-pause-circle bx-lg'
     isPlaying=true
-    
 
 }
 
@@ -124,8 +149,6 @@ function updateSeeker(){
 
 
 //SHUFFLE FUNCTION
-
-
 function shuffle(){
     const RandomNumber=Math.floor(Math.random()*musicPlaylist.length)
     currentMusic=RandomNumber
