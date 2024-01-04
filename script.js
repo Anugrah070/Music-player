@@ -2,13 +2,17 @@ const PlayPauseIcon=document.getElementById("PLayPause-Icon")
 const TracknameDOM=document.getElementById("Track-Name")
 const ArtistnameDOM=document.getElementById("Artist-Name")
 const CoverImg=document.getElementById("cover-img")
-let audio=document.getElementById("myAudio")
 const seekSlider=document.getElementById("seek-slider")
 const currentTimeDOM=document.getElementById("Current-time")
 const totalTime=document.querySelector("#total_time")
+const currentMusicDOM=document.getElementById("Current-musicID")
+const totalMusicDOM=document.getElementById("Total-MusicID")
+const repeatIconDOM=document.getElementById("repeat-icon")
+let audio=document.getElementById("myAudio")
 let playbackPosition=0
 let currentMusic=0
 let isPlaying=false
+let isRepeat=false
 
 const musicPlaylist=[
 
@@ -59,7 +63,7 @@ function prevMusic(){
     }
 
     else{
-        currentMusic=currentMusic-1
+        currentMusic-=1
         playbackPosition=0
         playAudio()
         
@@ -70,10 +74,11 @@ function prevMusic(){
 
 //RUNS NEXT MUSIC
 function nextMusic(){
+
     if (currentMusic<(musicPlaylist.length)-1) {
-    currentMusic=currentMusic+1
-    playbackPosition=0
-    playAudio()
+        isRepeat ? currentMusic=currentMusic:currentMusic+=1
+        playbackPosition=0
+        playAudio()
     }
     else{
     currentMusic=0
@@ -94,6 +99,8 @@ function togglePlayPause(){
 
 function playAudio(){
     audio.src=musicPlaylist[currentMusic].music
+    currentMusicDOM.textContent=currentMusic+1
+    totalMusicDOM.textContent=musicPlaylist.length
     TracknameDOM.textContent=musicPlaylist[currentMusic].TrackName
     ArtistnameDOM.textContent=musicPlaylist[currentMusic].artistName
     CoverImg.src=musicPlaylist[currentMusic].cover
@@ -154,3 +161,20 @@ function shuffle(){
     currentMusic=RandomNumber
     console.log("shuffling")
 }
+
+//REPEAT
+
+function togglerepeat(){
+    if (isRepeat) {
+        isRepeat=false
+        repeatIconDOM.style.color="black"
+    }
+    else{
+        
+        isRepeat=true
+        repeatIconDOM.style.color="red"
+    }
+    
+    
+}
+
